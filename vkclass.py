@@ -1,5 +1,13 @@
 import requests
-from config import API_URL, VERSION, TOKEN, FIELDS
+from config import API_URL, VERSION, FIELDS
+from utils.tokenvk import get_token
+from config import APP_ID
+
+TOKEN = get_token(APP_ID)
+
+
+#class KeyError(Exception):
+    #pass
 
 
 class VKUser:

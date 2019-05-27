@@ -4,7 +4,12 @@ from utils.params import ask_params, update_params
 from db.writer import writer
 from db.offset import get_offset, update_offset
 import time
+import json
 
+
+def json_writter(json_data):
+    with open("data.json", "w") as data_file:
+        json.dump(json_data, data_file, indent=2)
 
 def get_top_matches(users):
     users_scores = dict()
@@ -24,6 +29,7 @@ def get_top_photos(photos_list):
     profile_photos_ids = dict()
     for photo in profile_photos_list:
         profile_photos_ids[str(photo[0])] = photo[1][1]
+        #likes = profile_photos_ids['likes']['count']
     return profile_photos_ids
 
 
@@ -33,10 +39,12 @@ def prepare_result(top_matches):
     for match in top_matches:
         photos_list = match[0].get_photos()
         top_photos = get_top_photos(photos_list)
+        #likes = top_photos['likes']['count'] 'likes': likes
         match_dict = {
             'id': str(match[0].user_id),
             'url': f'http://vk.com/id{match[0].user_id}',
-            'photos': top_photos
+            'photos': top_photos,
+
         }
         result.append(match_dict)
         time.sleep(0.35)
@@ -77,3 +85,5 @@ def get_search_result():
         print('Saving to database')
         print('Finished successfully')
         print_result(result)
+        json_writter(result)
+
