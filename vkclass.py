@@ -6,10 +6,6 @@ from config import APP_ID
 TOKEN = get_token(APP_ID)
 
 
-#class KeyError(Exception):
-    #pass
-
-
 class VKUser:
 
     def __init__(self, user_id):
@@ -56,41 +52,41 @@ class VKUser:
                 self.error = 18
             elif code is 113:
                 self.error = 113
-        try:
+        if 'sex' in self.user_data:
             self.sex = self.user_data['sex']
-        except KeyError:
+        else:
             pass
-        try:
+        if 'city' in self.user_data:
             self.city = self.user_data['city']['id']
-        except KeyError:
+        else:
             pass
-        try:
+        if 'country' in self.user_data:
             self.country = self.user_data['country']['id']
-        except KeyError:
+        else:
             pass
-        try:
+        if 'common_count' in self.user_data:
             self.common_count = self.user_data['common_count']
-        except KeyError:
+        else:
             pass
-        try:
+        if 'interests' in self.user_data:
             self.interests = self.user_data['interests']
-        except KeyError:
+        else:
             pass
-        try:
+        if 'music' in self.user_data:
             self.music = self.user_data['music']
-        except KeyError:
+        else:
             pass
-        try:
+        if 'tv' in self.user_data:
             self.tv = self.user_data['tv']
-        except KeyError:
+        else:
             pass
-        try:
+        if 'books' in self.user_data:
             self.books = self.user_data['books']
-        except KeyError:
+        else:
             pass
-        try:
+        if 'movies' in self.user_data:
             self.movies = self.user_data['movies']
-        except KeyError:
+        else:
             pass
         return self.user_data
 
@@ -148,41 +144,41 @@ class VKUser:
             for item in result:
                 instance = VKUser(item['id'])
                 result_instances.append(instance)
-                try:
+                if 'sex' in item:
                     instance.sex = item['sex']
-                except KeyError:
+                else:
                     pass
-                try:
+                if 'city' in item:
                     instance.city = item['city']['id']
-                except KeyError:
+                else:
                     pass
-                try:
+                if 'country' in item:
                     instance.country = item['country']['id']
-                except KeyError:
+                else:
                     pass
-                try:
+                if 'common_count' in item:
                     instance.common_count = item['common_count']
-                except KeyError:
+                else:
                     pass
-                try:
+                if 'interests' in item:
                     instance.interests = item['interests']
-                except KeyError:
+                else:
                     pass
-                try:
+                if 'music' in item:
                     instance.music = item['music']
-                except KeyError:
+                else:
                     pass
-                try:
+                if 'tv' in item:
                     instance.tv = item['tv']
-                except KeyError:
+                else:
                     pass
-                try:
+                if 'books' in item:
                     instance.books = item['books']
-                except KeyError:
+                else:
                     pass
-                try:
+                if 'movies' in item:
                     instance.movies = item['movies']
-                except KeyError:
+                else:
                     pass
         except KeyError:
             result = request['error']
